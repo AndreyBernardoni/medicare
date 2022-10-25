@@ -39,6 +39,8 @@ class _HomePageState extends State<HomePage> {
 
   _appBar() {
     return AppBar(
+      elevation: 0,
+      backgroundColor: context.theme.bottomAppBarColor,
       leading: GestureDetector(
         onTap: () {
           ThemeService().switchTheme();
@@ -48,16 +50,17 @@ class _HomePageState extends State<HomePage> {
                 ? "Activated Dark Theme!"
                 : "Activated Light Theme!",
           );
+          notifyHelper.scheduledNotification();
         },
         child: Icon(
-          Icons.nightlight_round,
+          Get.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round,
           size: 20,
+          color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
       actions: [
-        Icon(
-          Icons.person,
-          size: 20,
+        CircleAvatar(
+          backgroundImage: AssetImage("images/me.jpg"),
         ),
         SizedBox(
           width: 20,
